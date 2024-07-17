@@ -1,36 +1,31 @@
 #!/usr/bin/env bash
 
-# Script to download files
+mkdir -p ./downloads
 
-# Get local path
-localpath=$(pwd)
-echo "Local path: $localpath"
+# PFAM Download -- Optional --
 
-# Create the list directory to save list of remote files and directories
-listpath="$localpath/list"
-echo "List path: $listpath"
-mkdir -p $listpath
-cd $listpath;
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/pfam.tar.gz
+mv pfam.tar.gz ./downloads
+rm pfam.tar.gz;
 
-# Define the FTP base address
-export ftpbase=""
+# Download Vocab/Model files
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/pfam.model
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/pfam.vocab
 
-# Retrieve the list of files to download from FTP base address
-wget --no-remove-listing $ftpbase
-cat index.html | grep -Po '(?<=href=")[^"]*' | sort | cut -d "/" -f 10 > files.txt
-rm .listing
-rm index.html
+mv pfam.model downloads
+mv pfam.vocab downloads
 
-# Create the download directory
-export downloadpath="$localpath/download"
-echo "Download path: $downloadpath"
-mkdir -p "$downloadpath"
-cd $downloadpath;
+# Download Data Files
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/secondary_structure.tar.gz
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/proteinnet.tar.gz
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/remote_homology.tar.gz
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/fluorescence.tar.gz
+wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/stability.tar.gz
 
-# Download files in parallel
-cat $listpath/files.txt | xargs -P14 -n1 bash -c '
-  echo $0
-  wget -nH -q -nc -P $downloadpath $ftpbase$0
-'
+# Unzip Files
 
-echo "Download done."
+mv secondary_structure.tar.gz ./downloads
+mv proteinnet.tar.gz ./downloads
+mv remote_homology.tar.gz ./downloads
+mv fluorescence.tar.gz ./downloads
+mv stability.tar.gz ./downloads
