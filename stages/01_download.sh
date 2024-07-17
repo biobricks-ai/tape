@@ -5,8 +5,8 @@ mkdir -p ./downloads
 # PFAM Download -- Optional --
 
 wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/pfam.tar.gz
-mv pfam.tar.gz ./downloads
-rm pfam.tar.gz;
+tar -xvf pfam.tar.gz -C ./downloads
+rm pfam.tar.gz
 
 # Download Vocab/Model files
 wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/pfam.model
@@ -24,8 +24,8 @@ wget http://s3.amazonaws.com/songlabdata/proteindata/data_pytorch/stability.tar.
 
 # Unzip Files
 
-mv secondary_structure.tar.gz ./downloads
-mv proteinnet.tar.gz ./downloads
-mv remote_homology.tar.gz ./downloads
-mv fluorescence.tar.gz ./downloads
-mv stability.tar.gz ./downloads
+tar -xvf secondary_structure.tar.gz -C ./downloads
+tar -xvf  proteinnet.tar.gz -C ./downloads
+tar -xvf  remote_homology.tar.gz -C ./downloads
+tar -xvf  fluorescence.tar.gz -C ./downloads
+tar -xvf  stability.tar.gz -C ./downloads
