@@ -22,5 +22,5 @@ for file in files:
         df.to_parquet(out_file)
 
   except Exception as e:
-    print ('ADRECS File Conversion Failed: %s' % e)
+    print ('TAPE File Conversion Failed: %s' % e)
 
