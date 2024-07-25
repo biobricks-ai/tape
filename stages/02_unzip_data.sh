@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mkdir -p ./extract
+
 tar -xvf download/pfam.tar.gz -C extract/
 
 tar -xvf  download/secondary_structure.tar.gz -C extract/
