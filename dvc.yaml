@@ -10,14 +10,20 @@
 
 stages:
   download:
-    cmd: stages/01_download.sh
+    cmd: bash stages/01_download_data.sh
     deps:
-      - stages/01_download.sh
+      - stages/01_download_data.sh
     outs:
-      - downloads/
-  process:
-    cmd: python3 stages/02_process_data.py
+      - download/
+  unzip:
+    cmd: bash stages/02_unzip_data.sh
     deps:
-      - ./stages/02_process_data.py
+      - stages/02_unzip_data.sh
+    outs:
+      - extract/
+  process:
+    cmd: python3 stages/03_process_data.py
+    deps:
+      - ./stages/03_process_data.py
     outs:
       - brick/
