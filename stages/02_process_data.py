@@ -15,7 +15,7 @@ for file in files:
 
   try:
       with gzip.open(file, 'rb') as file_in:
-        lines = file_in.read().decode("utf-8").split('\n')
+        lines = file_in.read().decode("utf.split('\n')
         data = [ line.split('\t') for line in lines ]
         headers = data.pop(0)
         df = pd.DataFrame(data, columns=headers)
